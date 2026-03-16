@@ -157,9 +157,9 @@ The expected value is the average of all possible outcomes, weighted by the prob
 
 
 ### 2) Single Simulation Over Time (Narrative + Plot)
-
+<!--
 Narrate and visualize what happens to your account balance over the course of one simulation run. Describe the trajectory and state whether you would be satisfied with this particular outcome. Explain your reasoning.
-
+-->
 ```{python}
 #| label: q2-single-sim-py
 #| fig-cap: "Single simulation path of account balance"
@@ -194,12 +194,12 @@ ax.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.show()
 ```
-Over this one simulation run, the account balance starts at $30,000 and trends downwards, having spikes here and there but never returning to $30,000 or more. The value of the account balance ends up at less than $10,000 after 51 years, a huge loss from the buy-in. This is a significant loss, and I would not be satisfied with this outcome.
+Over this one simulation run, the account balance starts at $30,000 and trends downwards, having spikes here and there but never returning to $30,000 or more. The value of the account balance ends up at less than $10,000 after 51 years, a huge loss from the buy-in. This is a significant loss, and I would not be satisfied with this outcome. This simulation directly contradicts what one might expect using the expected value method on one flip to predict the total outcome.
 
 ### 3) 100 Simulations: Distribution of Final Balances
-
+<!--
 Describe the distribution of final account balances across 100 simulations. Report the mean, median, and the probability of ending with more than your initial $30,000. Given these results, would you be satisfied with the likely outcomes? Explain your reasoning.
-
+-->
 ```{python}
 #| label: q3-dist-100-py
 #| fig-cap: "Distribution of final balances across 100 simulations"
@@ -210,8 +210,55 @@ Describe the distribution of final account balances across 100 simulations. Repo
 # Round balances to whole dollars; probabilities to 2-3 decimals.
 # Present these statistics OUTSIDE this chunk in narrative form.
 # Example: "The median outcome was $12,345, well below the initial investment."
+import numpy as np
+import matplotlib.pyplot as plt
 
+buy_in = 30_000
+n_periods = 51
+n_sims = 100
+
+# One seed for reproducibility; each simulation gets its own random flips.
+np.random.seed(123)
+final_balances = []
+
+for _ in range(n_sims):
+    flips = np.random.randint(0, 2, size=n_periods)  # 1 = heads (+50%), 0 = tails (-40%)
+    balance = buy_in
+    for t in range(n_periods):
+        if flips[t] == 1:
+            balance = balance * 1.50
+        else:
+            balance = balance * 0.60
+    final_balances.append(balance)
+
+final_balances = np.array(final_balances)
+mean_balance = round(float(np.mean(final_balances)), 0)
+median_balance = round(float(np.median(final_balances)), 0)
+p_above_30k = np.mean(final_balances > buy_in)
+p_above_30k_rounded = round(p_above_30k, 3)
+
+# Buckets: $0–10k, $10k–20k, ..., $90k–100k, then $100,000 and up (fixed upper edge so axis scale stays readable)
+bin_edges = [0, 10_000, 20_000, 30_000, 40_000, 50_000, 60_000, 70_000, 80_000, 90_000, 100_000, 10_000_000]
+
+fig, ax = plt.subplots(figsize=(8, 4))
+ax.hist(final_balances, bins=bin_edges, color="steelblue", edgecolor="white", alpha=0.8)
+ax.set_xlim(0, 110_000)  # show 0–110k so all bars are visible and x-axis isn’t stretched by huge outliers
+ax.axvline(x=buy_in, color="red", linestyle="--", linewidth=2, label=f"Buy-in ${buy_in:,}")
+ax.set_xlabel("Final balance ($)")
+ax.set_ylabel("Count")
+ax.set_title("Distribution of final balances across 100 simulations")
+tick_positions = [0, 10_000, 20_000, 30_000, 40_000, 50_000, 60_000, 70_000, 80_000, 90_000, 100_000]
+ax.set_xticks(tick_positions)
+ax.set_xticklabels([f"${x:,.0f}" for x in tick_positions], rotation=45, ha="right")
+ax.legend()
+ax.grid(True, alpha=0.3)
+# Stats box with actual simulation results
+stats_text = f"Mean: ${mean_balance:,.0f}\nMedian: ${median_balance:,.0f}\nP(> $30,000): {p_above_30k_rounded:.3f}"
+ax.text(0.98, 0.98, stats_text, transform=ax.transAxes, fontsize=9, verticalalignment="top", horizontalalignment="right", bbox=dict(boxstyle="round", facecolor="white", edgecolor="gray", alpha=0.9))
+plt.tight_layout()
+plt.show()
 ```
+Now as we plot the distribution of final balances across 100 simulations, we can see that the distribution is heavily skewed to the left, with most simulations ending up with less than $30,000. The mean balance is $179,752, which is heavily skewed by the outliers in the data. The median balance is $1,292, and the probability of ending with more than $30,000 is 20%. This indicates that way more often than not, I am ending up with a loss from the buy-in, and in fact a significant loss at that. I would not be satisfied with the likely outcomes.
 
 ### 4) Probability Balance > $30,000 at Age 75 (Original Game)
 
