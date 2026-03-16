@@ -8,7 +8,7 @@ execute:
   echo: false
   eval: true
 ---
-
+<!--
 # 🎲 Simulation Challenge - Starter Template
 
 :::: {.callout-important}
@@ -76,7 +76,7 @@ Your analysis should read as a **persuasive narrative** arguing for or against t
 
 > *"After one flip, the expected account balance is $36,000—a 20% increase over the initial $30,000 buy-in. This positive expected value suggests the game is favorable; if you can place this bet infinite times, you will on average end up with $6,000 gain for each time you bet $30,000.  Note: this is an interpretation for a slighlty different game."*
 ::::
-
+-->
 ## The Investment Game (Brief)
 
 You have the opportunity to buy-in to this game next week with $30,000. Your job is to analyze the potential outcomes of the game and communicate why you should or should not buy-in.  
@@ -128,8 +128,9 @@ investmentDAG.show()
 ## Analysis Tasks (Fill These In)
 
 ### 1) Expected Value After 1 Flip
-
+<!--
 Explain whether the expected value of your account balance after one flip is greater than, equal to, or less than $30,000. What is the gain in expected value as a percentage of your buy-in? Based on this simple analysis, state whether you would recommend buying into the game and why.
+-->
 
 ```{python}
 #| label: q1-expected-value-py
@@ -139,7 +140,21 @@ Explain whether the expected value of your account balance after one flip is gre
 # Present your findings OUTSIDE this chunk in narrative prose.
 # Example: "The expected value is $36,000, a 20.0% gain over the buy-in."
 
+buy_in = 30_000
+p_heads = 0.5
+p_tails = 0.5
+balance_heads = buy_in * 1.50   # +50% on heads
+balance_tails = buy_in * 0.60   # -40% on tails
+
+ev_one_flip = p_heads * balance_heads + p_tails * balance_tails
+ev_rounded = round(ev_one_flip, 0)
+pct_gain = 100 * (ev_one_flip - buy_in) / buy_in
+pct_gain_rounded = round(pct_gain, 1)
+
+print(f"The expected value after one flip is ${ev_rounded:,.0f}, a {pct_gain_rounded}% gain over the buy-in.")
 ```
+The expected value is the average of all possible outcomes, weighted by the probability of each outcome. In this case, that would be the buy in multiplied by the probability of heads, plus the buy in multiplied by the probability of tails. The expected value is $31,500, a 5.0% gain over the buy-in. Based on this simple analysis, I would recommend buying into the game because the expected value is greater than the buy-in, suggesting that on average, I will end up with more than the buy-in.
+
 
 ### 2) Single Simulation Over Time (Narrative + Plot)
 
@@ -149,14 +164,37 @@ Narrate and visualize what happens to your account balance over the course of on
 #| label: q2-single-sim-py
 #| fig-cap: "Single simulation path of account balance"
 
-# Simulate one path from $30,000 over N periods.
-# Use matplotlib (Object Oriented style) for the time-series plot.
-# Set a random seed for reproducibility.
-# Round final balance to whole dollars in your narrative.
-# Present your interpretation OUTSIDE this chunk—describe the trajectory
-# and whether you would be satisfied with this outcome.
+import numpy as np
+import matplotlib.pyplot as plt
 
+np.random.seed(42)
+buy_in = 30_000
+n_periods = 51  # years until age 75 (e.g., buy-in at 24)
+
+# One coin flip per period: 1 = heads (+50%), 0 = tails (-40%)
+flips = np.random.randint(0, 2, size=n_periods)
+balances = [buy_in]
+for t in range(n_periods):
+    if flips[t] == 1:
+        balances.append(balances[-1] * 1.50)
+    else:
+        balances.append(balances[-1] * 0.60)
+
+final_balance = balances[-1]
+final_balance_rounded = round(final_balance, 0)
+
+fig, ax = plt.subplots(figsize=(8, 4))
+ax.plot(range(n_periods + 1), balances, color="steelblue", linewidth=2)
+ax.axhline(y=buy_in, color="gray", linestyle="--", alpha=0.7, label=f"Buy-in ${buy_in:,}")
+ax.set_xlabel("Year")
+ax.set_ylabel("Account balance ($)")
+ax.set_title("Single simulation: account balance over time")
+ax.legend()
+ax.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
 ```
+Over this one simulation run, the account balance starts at $30,000 and trends downwards, having spikes here and there but never returning to $30,000 or more. The value of the account balance ends up at less than $10,000 after 51 years, a huge loss from the buy-in. This is a significant loss, and I would not be satisfied with this outcome.
 
 ### 3) 100 Simulations: Distribution of Final Balances
 
@@ -210,7 +248,7 @@ Instead of having the full balance at risk with each coin flip, assume only 25% 
 
 Explain what the Kelly Criterion is and how it relates to the modified strategy from Section 5. Does the Kelly Criterion support your recommendation?
 
-
+<!--
 ## Professional Presentation
 
 - **Clear narrative:** tell the story succinctly (aim for a 1–5 minute read)
@@ -234,3 +272,4 @@ Explain what the Kelly Criterion is and how it relates to the modified strategy 
 - Keep figures readable and labeled; prefer professional styling
 - Commit early and often; render locally before pushing
 
+-->
