@@ -266,13 +266,37 @@ Report the probability that your final balance exceeds $30,000. Interpret what t
 
 ```{python}
 #| label: q4-prob-original-py
+#| # Using the 100 simulations, estimate P(final > $30,000).
+#| Round the probability to 2-3 decimal places.
+#| Present this result OUTSIDE this chunk in narrative form.
+#| Interpret what this probability means for your investment decision.
+#| fig-cap: "Probability that final balance exceeds $30,000 (100 simulations)"
 
-# Using the 100 simulations, estimate P(final > $30,000).
-# Round the probability to 2-3 decimal places.
-# Present this result OUTSIDE this chunk in narrative form.
-# Interpret what this probability means for your investment decision.
+import numpy as np
+import matplotlib.pyplot as plt
 
+# Using the 100 simulations from Section 3, estimate P(final > $30,000).
+prob_above_30k = np.mean(final_balances > buy_in)
+prob_above_30k_rounded = round(prob_above_30k, 3)
+prob_below_or_equal = 1 - prob_above_30k
+
+# Visualization: bar chart of the two probabilities
+fig, ax = plt.subplots(figsize=(5, 4))
+categories = ["Final > $30,000\n(profit)", "Final ≤ $30,000\n(loss)"]
+probs = [prob_above_30k, prob_below_or_equal]
+colors = ["steelblue", "coral"]
+bars = ax.bar(categories, probs, color=colors, edgecolor="white", linewidth=1.2)
+ax.set_ylabel("Probability")
+ax.set_ylim(0, 1)
+ax.set_title("P(final balance vs buy-in) from 100 simulations")
+for bar, p in zip(bars, probs):
+    ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.02, f"{p:.1%}", ha="center", fontsize=11, fontweight="bold")
+ax.grid(True, axis="y", alpha=0.3)
+plt.tight_layout()
+plt.show()
 ```
+
+The estimated probability that the final balance exceeds $30,000 is **`{{python}} prob_above_30k_rounded`** (about **`{{python}} round(prob_above_30k * 100, 1)`%**). That means in only about one in five runs do you end up ahead of your buy-in; the other four in five you finish with less than $30,000. So there is a **majority chance of losing money** in this game, even though the one-flip expected value suggested a small average gain. This **does change the recommendation from Section 1**: Section 1’s expected-value argument pointed toward buying in, but the simulation shows that the *typical* outcome is a loss. I would **not** recommend buying in, because the high chance of finishing below $30,000 outweighs the positive expected value.
 
 ### 5) Modified Strategy (Bet Exactly 25% Each Round)
 
