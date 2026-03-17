@@ -261,9 +261,9 @@ plt.show()
 Now as we plot the distribution of final balances across 100 simulations, we can see that the distribution is heavily skewed to the left, with most simulations ending up with less than $30,000. The mean balance is $179,752, which is heavily skewed by the outliers in the data. The median balance is $1,292, and the probability of ending with more than $30,000 is 20%. This indicates that way more often than not, I am ending up with a loss from the buy-in, and in fact a significant loss at that. I would not be satisfied with the likely outcomes.
 
 ### 4) Probability Balance > $30,000 at Age 75 (Original Game)
-
+<!--
 Report the probability that your final balance exceeds $30,000. Interpret what this probability means for your investment decision—does this change your recommendation from Section 1?
-
+-->
 ```{python}
 #| label: q4-prob-original-py
 #| # Using the 100 simulations, estimate P(final > $30,000).
@@ -299,21 +299,97 @@ plt.show()
 The estimated probability that the final balance exceeds $30,000 is **`{{python}} prob_above_30k_rounded`** (about **`{{python}} round(prob_above_30k * 100, 1)`%**). That means in only about one in five runs do you end up ahead of your buy-in; the other four in five you finish with less than $30,000. So there is a **majority chance of losing money** in this game, even though the one-flip expected value suggested a small average gain. This **does change the recommendation from Section 1**: Section 1’s expected-value argument pointed toward buying in, but the simulation shows that the *typical* outcome is a loss. I would **not** recommend buying in, because the high chance of finishing below $30,000 outweighs the positive expected value.
 
 ### 5) Modified Strategy (Bet Exactly 25% Each Round)
-
+<!--
 Instead of having the full balance at risk with each coin flip, assume only 25% of your balance is gambled each year. Compare this modified strategy to the original game: Which is riskier? Which has better upside? Which strategy would you recommend and why?
-
+-->
 ```{python}
 #| label: q5-modified-25pct-py
-#| fig-cap: "Modified strategy distribution (bet 25% each round)"
+#| fig-cap: "Original vs modified (25% at risk) strategy: distribution of final balances"
 
-# Implement the modified game where only 25% of your balance is at risk each flip.
-# Run 100 simulations and plot the distribution of final balances.
-# Estimate P(final > $30,000) and compare to the original strategy.
-# Visually compare outcome distributions of both strategies.
-# Round balances to whole dollars; probabilities to 2-3 decimals.
-# Present your comparison and recommendation OUTSIDE this chunk in narrative form.
+import numpy as np
+import matplotlib.pyplot as plt
 
+buy_in = 30_000
+n_periods = 51
+n_sims = 100
+np.random.seed(456)
+
+# Original: full balance at risk each flip — heads ×1.50, tails ×0.60
+final_original = []
+for _ in range(n_sims):
+    balance = buy_in
+    flips = np.random.randint(0, 2, size=n_periods)
+    for t in range(n_periods):
+        balance = balance * (1.50 if flips[t] == 1 else 0.60)
+    final_original.append(balance)
+final_original = np.array(final_original)
+
+# Modified: only 25% at risk each flip → 75% safe + 25%×1.50 on heads, 25%×0.60 on tails
+# New balance = 0.75*B + 0.25*B*mult = B*(0.75 + 0.25*mult) → heads 1.125, tails 0.90
+mult_heads_25 = 0.75 + 0.25 * 1.50   # 1.125
+mult_tails_25 = 0.75 + 0.25 * 0.60   # 0.90
+np.random.seed(456)
+final_modified = []
+for _ in range(n_sims):
+    balance = buy_in
+    flips = np.random.randint(0, 2, size=n_periods)
+    for t in range(n_periods):
+        balance = balance * (mult_heads_25 if flips[t] == 1 else mult_tails_25)
+    final_modified.append(balance)
+final_modified = np.array(final_modified)
+
+# Statistics (rounded)
+mean_orig = round(float(np.mean(final_original)), 0)
+median_orig = round(float(np.median(final_original)), 0)
+p_above_30k_orig = np.mean(final_original > buy_in)
+mean_mod = round(float(np.mean(final_modified)), 0)
+median_mod = round(float(np.median(final_modified)), 0)
+p_above_30k_mod = np.mean(final_modified > buy_in)
+
+# Shared bin edges for comparable histograms
+bin_edges = [0, 10_000, 20_000, 30_000, 40_000, 50_000, 60_000, 70_000, 80_000, 90_000, 100_000, 150_000, 500_000]
+x_max = 120_000
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4.5), sharey=True)
+
+# Original strategy
+ax1.hist(final_original, bins=bin_edges, color="steelblue", edgecolor="white", alpha=0.8)
+ax1.set_xlim(0, x_max)
+ax1.axvline(x=buy_in, color="red", linestyle="--", linewidth=2, label=f"Buy-in ${buy_in:,}")
+ax1.set_xlabel("Final balance ($)")
+ax1.set_ylabel("Count")
+ax1.set_title("Original (100% at risk each round)")
+ax1.set_xticks([0, 30_000, 60_000, 90_000])
+ax1.set_xticklabels(["$0", "$30k", "$60k", "$90k"])
+ax1.legend()
+ax1.grid(True, alpha=0.3)
+txt1 = f"Mean: ${mean_orig:,.0f}\nMedian: ${median_orig:,.0f}\nP(> $30k): {p_above_30k_orig:.2f}"
+ax1.text(0.98, 0.98, txt1, transform=ax1.transAxes, fontsize=9, va="top", ha="right",
+         bbox=dict(boxstyle="round", facecolor="white", edgecolor="gray", alpha=0.9))
+
+# Modified 25% strategy
+ax2.hist(final_modified, bins=bin_edges, color="forestgreen", edgecolor="white", alpha=0.8)
+ax2.set_xlim(0, x_max)
+ax2.axvline(x=buy_in, color="red", linestyle="--", linewidth=2, label=f"Buy-in ${buy_in:,}")
+ax2.set_xlabel("Final balance ($)")
+ax2.set_title("Modified (25% at risk each round)")
+ax2.set_xticks([0, 30_000, 60_000, 90_000])
+ax2.set_xticklabels(["$0", "$30k", "$60k", "$90k"])
+ax2.legend()
+ax2.grid(True, alpha=0.3)
+txt2 = f"Mean: ${mean_mod:,.0f}\nMedian: ${median_mod:,.0f}\nP(> $30k): {p_above_30k_mod:.2f}"
+ax2.text(0.98, 0.98, txt2, transform=ax2.transAxes, fontsize=9, va="top", ha="right",
+         bbox=dict(boxstyle="round", facecolor="white", edgecolor="gray", alpha=0.9))
+
+plt.tight_layout()
+plt.show()
 ```
+
+**Comparison and recommendation.** The **original strategy is riskier**: the full balance is at risk each round, so outcomes are much more volatile—very high upside when you get a string of heads, but the median is far below the buy-in and most paths end below $30,000. The **modified strategy (25% at risk)** is less volatile: each round you only bet 25% of your balance, so you get +12.5% on heads and −10% on tails instead of +50% and −40%. That shrinks both extreme gains and extreme losses.
+
+**Upside:** The original has *better* upside in the sense that a few simulations can reach very high balances (e.g., hundreds of thousands); the 25% strategy tends to cluster in a narrower band, so the best outcomes are lower. So the original is riskier and has higher potential upside albeit with a higher risk of losing money; the 25% strategy trades away some of that upside for much less downside in that losses are more minute per loss.
+
+**Recommendation:** I would **recommend the modified (25%) strategy** over the original. The simulation shows that with 25% at risk, P(final > $30,000) is about **`{{python}} round(p_above_30k_mod, 2)`** versus **`{{python}} round(p_above_30k_orig, 2)`** for the original—so a much larger share of paths end above the buy-in under the modified strategy, and the distribution of final balances is less skewed toward severe losses. The original game has positive expected value but a high probability of losing money; the 25% version keeps the favorable odds while reducing the chance of a catastrophic outcome, which is more aligned with a typical long-horizon investment goal. The extremes of how much money you gain is limited to a few simulations, but the losses are more manageable and less likely to be catastrophic, allowing for your balance to recover more easily form losses.
 
 ### 6) The Kelly Criterion
 
