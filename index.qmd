@@ -392,8 +392,15 @@ plt.show()
 **Recommendation:** I would **recommend the modified (25%) strategy** over the original. The simulation shows that with 25% at risk, P(final > $30,000) is about **`{{python}} round(p_above_30k_mod, 2)`** versus **`{{python}} round(p_above_30k_orig, 2)`** for the original—so a much larger share of paths end above the buy-in under the modified strategy, and the distribution of final balances is less skewed toward severe losses. The original game has positive expected value but a high probability of losing money; the 25% version keeps the favorable odds while reducing the chance of a catastrophic outcome, which is more aligned with a typical long-horizon investment goal. The extremes of how much money you gain is limited to a few simulations, but the losses are more manageable and less likely to be catastrophic, allowing for your balance to recover more easily form losses.
 
 ### 6) The Kelly Criterion
+<!--
+Explain what the Kelly Criterion is and how it relates to the modified strategy from 
+Section 5. Does the Kelly Criterion support your recommendation?
+-->
+**What the Kelly Criterion is.** The Kelly Criterion is a formula for choosing the fraction of your bankroll to bet on a repeated favorable gamble so that long-run growth of wealth is maximized. It balances the upside of betting more (higher expected gain) against the downside of overbetting (higher risk of ruin and volatility drag). For a simple two-outcome bet where you gain a fraction \(b\) of your stake with probability \(p\) and lose a fraction \(a\) with probability \(1-p\), the optimal fraction is \(f^* = \frac{p \cdot b - (1-p) \cdot a}{a \cdot b}\), provided this is positive (favorable bet).
 
-Explain what the Kelly Criterion is and how it relates to the modified strategy from Section 5. Does the Kelly Criterion support your recommendation?
+**Relation to the modified strategy.** In our game, each flip is a favorable bet: \(p = 0.5\), and on heads you gain 50% on the amount at risk while on tails you lose 40% on that amount. So \(b = 0.5\) and \(a = 0.4\). Plugging in: \(f^* = \frac{0.5(0.5) - 0.5(0.4)}{0.4(0.5)} = \frac{0.25 - 0.20}{0.20} = 0.25\). So the Kelly-optimal fraction is **25%** of your balance at risk each round—exactly the modified strategy from Section 5.
+
+**Does Kelly support the recommendation?** Yes. The Kelly Criterion says that betting 25% each round maximizes long-run growth and avoids the volatility drag and high risk of loss that come from betting the full balance (100%). The original game effectively bets 100% each round, which is far above Kelly and is riskier than optimal. Recommending the modified 25% strategy is therefore aligned with Kelly: it is the fraction that theory recommends for this payoff structure, and the simulations showed that this same fraction yields a much higher probability of finishing above the buy-in and a more manageable distribution of outcomes.
 
 <!--
 ## Professional Presentation
