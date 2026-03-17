@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -20,55 +20,21 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
 <script src="index_files/libs/clipboard/clipboard.min.js"></script>
 <script src="index_files/libs/quarto-html/quarto.js" type="module"></script>
 <script src="index_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="index_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="index_files/libs/quarto-html/popper.min.js"></script>
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="index_files/libs/quarto-html/anchor.min.js"></script>
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap-bb462d781dde1847d9e3ccf7736099dd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="index_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -99,107 +65,75 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="simulation-challenge---starter-template" class="level1">
-<h1>🎲 Simulation Challenge - Starter Template</h1>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-📋 What You Need To Do
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul class="task-list">
-<li><label><input type="checkbox">Fork <a href="https://github.com/flyaflya/simulationChallenge">this repository</a> to create <code>simulationChallenge</code> in your GitHub</label></li>
-<li><label><input type="checkbox">Clone locally and open in Cursor</label></li>
-<li><label><input type="checkbox">Write your analysis in this <code>index.qmd</code></label></li>
-<li><label><input type="checkbox">Render to HTML (<code>quarto render</code> or Render button)</label></li>
-<li><label><input type="checkbox">Push HTML to your repo and enable GitHub Pages</label></li>
-<li><label><input type="checkbox">Share your site: <code>https://[your-username].github.io/simulationChallenge/</code></label></li>
-</ul>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-🐍 Python Environment Setup
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Before rendering, create a fresh virtual environment and install the required packages:</p>
-<ol type="1">
-<li>Press <code>Ctrl+Shift+P</code> to open the Command Palette</li>
-<li>Type <strong>“Python: Select Interpreter”</strong> and select it</li>
-<li>Click <strong>“+ Create Virtual Environment…”</strong></li>
-<li>Choose <strong>Venv</strong></li>
-<li>Select your Python installation (e.g., Python 3.12)</li>
-<li>Wait for the environment to be created and activated</li>
-</ol>
-<p>Then open a terminal and install dependencies:</p>
-<p><strong>Windows:</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">py</span> <span class="at">-m</span> pip install jupyter matplotlib pandas daft-pgm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Mac:</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> pip install jupyter matplotlib pandas daft-pgm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This ensures you have everything needed for Quarto rendering and the DAG visualizations.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-⚠️ AI Partnership Required
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Use Cursor AI for speed, but ensure you understand and can explain the results in your own words. Verify cursor’s calculations as investment simulation is tricky.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-📊 Grading Criteria
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li><strong>Sections 1–4:</strong> Required. These sections can earn up to <strong>90%</strong> of the grade.</li>
-<li><strong>Sections 5–6:</strong> Optional stretch. Strong, well-supported work here can bring your score up to <strong>100%</strong>.</li>
-</ul>
-<p><strong>Your grade depends on narrative clarity and insight, not just correct calculations.</strong> Present a persuasive argument for or against the investment, supported by your analysis.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-📝 How to Present Your Analysis
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Your analysis should read as a <strong>persuasive narrative</strong> arguing for or against the investment. Use data and calculations to support your argument, but present findings <strong>inline in prose</strong>—not as raw code output.</p>
-<ul>
-<li><strong>Round figures</strong> for readability (whole dollars for balances, 2-3 decimals for probabilities)</li>
-<li><strong>Interpret results</strong> in your own words outside of code chunks</li>
-<li>Use Quarto inline code (e.g., <code>`{python} round(ev, 0)`</code>) or type values directly</li>
-</ul>
-<p><strong>Example:</strong> Instead of printing <code>36000.0</code> from code, write:</p>
-<blockquote class="blockquote">
-<p><em>“After one flip, the expected account balance is $36,000—a 20% increase over the initial $30,000 buy-in. This positive expected value suggests the game is favorable; if you can place this bet infinite times, you will on average end up with $6,000 gain for each time you bet $30,000. Note: this is an interpretation for a slighlty different game.”</em></p>
-</blockquote>
-</div>
-</div>
+<!--
+# 🎲 Simulation Challenge - Starter Template
+
+:::: {.callout-important}
+## 📋 What You Need To Do
+
+- [ ] Fork [this repository](https://github.com/flyaflya/simulationChallenge) to create `simulationChallenge` in your GitHub
+- [ ] Clone locally and open in Cursor
+- [ ] Write your analysis in this `index.qmd`
+- [ ] Render to HTML (`quarto render` or Render button)
+- [ ] Push HTML to your repo and enable GitHub Pages
+- [ ] Share your site: `https://[your-username].github.io/simulationChallenge/`
+::::
+
+:::: {.callout-note}
+## 🐍 Python Environment Setup
+
+Before rendering, create a fresh virtual environment and install the required packages:
+
+1. Press `Ctrl+Shift+P` to open the Command Palette
+2. Type **"Python: Select Interpreter"** and select it
+3. Click **"+ Create Virtual Environment..."**
+4. Choose **Venv**
+5. Select your Python installation (e.g., Python 3.12)
+6. Wait for the environment to be created and activated
+
+Then open a terminal and install dependencies:
+
+**Windows:**
+```bash
+py -m pip install jupyter matplotlib pandas daft-pgm
+```
+
+**Mac:**
+```bash
+python3 -m pip install jupyter matplotlib pandas daft-pgm
+```
+
+This ensures you have everything needed for Quarto rendering and the DAG visualizations.
+::::
+
+:::: {.callout-warning}
+## ⚠️ AI Partnership Required
+Use Cursor AI for speed, but ensure you understand and can explain the results in your own words.  Verify cursor's calculations as investment simulation is tricky.
+::::
+
+:::: {.callout-important}
+## 📊 Grading Criteria
+
+- **Sections 1–4:** Required. These sections can earn up to **90%** of the grade.
+- **Sections 5–6:** Optional stretch. Strong, well-supported work here can bring your score up to **100%**.
+
+**Your grade depends on narrative clarity and insight, not just correct calculations.** Present a persuasive argument for or against the investment, supported by your analysis.
+::::
+
+:::: {.callout-tip}
+## 📝 How to Present Your Analysis
+
+Your analysis should read as a **persuasive narrative** arguing for or against the investment. Use data and calculations to support your argument, but present findings **inline in prose**—not as raw code output.
+
+- **Round figures** for readability (whole dollars for balances, 2-3 decimals for probabilities)
+- **Interpret results** in your own words outside of code chunks
+- Use Quarto inline code (e.g., `` `{{python}} round(ev, 0)` ``) or type values directly
+
+**Example:** Instead of printing `36000.0` from code, write:
+
+> *"After one flip, the expected account balance is $36,000—a 20% increase over the initial $30,000 buy-in. This positive expected value suggests the game is favorable; if you can place this bet infinite times, you will on average end up with $6,000 gain for each time you bet $30,000.  Note: this is an interpretation for a slighlty different game."*
+::::
+-->
 <section id="the-investment-game-brief" class="level2">
 <h2 class="anchored" data-anchor-id="the-investment-game-brief">The Investment Game (Brief)</h2>
 <p>You have the opportunity to buy-in to this game next week with $30,000. Your job is to analyze the potential outcomes of the game and communicate why you should or should not buy-in.</p>
@@ -232,57 +166,120 @@ Figure&nbsp;1: Generative DAG model for the investment game showing how wealth e
 <h2 class="anchored" data-anchor-id="analysis-tasks-fill-these-in">Analysis Tasks (Fill These In)</h2>
 <section id="expected-value-after-1-flip" class="level3">
 <h3 class="anchored" data-anchor-id="expected-value-after-1-flip">1) Expected Value After 1 Flip</h3>
-<p>Explain whether the expected value of your account balance after one flip is greater than, equal to, or less than $30,000. What is the gain in expected value as a percentage of your buy-in? Based on this simple analysis, state whether you would recommend buying into the game and why.</p>
+<!--
+Explain whether the expected value of your account balance after one flip is greater than, equal to, or less than $30,000. What is the gain in expected value as a percentage of your buy-in? Based on this simple analysis, state whether you would recommend buying into the game and why.
+-->
+<div id="q1-expected-value-py" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-stdout">
+<pre><code>The expected value after one flip is $31,500, a 5.0% gain over the buy-in.</code></pre>
+</div>
+</div>
+<p>The expected value is the average of all possible outcomes, weighted by the probability of each outcome. In this case, that would be the buy in multiplied by the probability of heads, plus the buy in multiplied by the probability of tails. The expected value is $31,500, a 5.0% gain over the buy-in. Based on this simple analysis, I would recommend buying into the game because the expected value is greater than the buy-in, suggesting that on average, I will end up with more than the buy-in.</p>
 </section>
 <section id="single-simulation-over-time-narrative-plot" class="level3">
 <h3 class="anchored" data-anchor-id="single-simulation-over-time-narrative-plot">2) Single Simulation Over Time (Narrative + Plot)</h3>
-<p>Narrate and visualize what happens to your account balance over the course of one simulation run. Describe the trajectory and state whether you would be satisfied with this particular outcome. Explain your reasoning.</p>
+<!--
+Narrate and visualize what happens to your account balance over the course of one simulation run. Describe the trajectory and state whether you would be satisfied with this particular outcome. Explain your reasoning.
+-->
+<div id="cell-q2-single-sim-py" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div id="q2-single-sim-py" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/q2-single-sim-py-output-1.png" width="758" height="374" class="figure-img"></p>
+<figcaption>Single simulation path of account balance</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Over this one simulation run, the account balance starts at $30,000 and trends downwards, having spikes here and there but never returning to $30,000 or more. The value of the account balance ends up at less than $10,000 after 51 years, a huge loss from the buy-in. This is a significant loss, and I would not be satisfied with this outcome. This simulation directly contradicts what one might expect using the expected value method on one flip to predict the total outcome.</p>
 </section>
 <section id="simulations-distribution-of-final-balances" class="level3">
 <h3 class="anchored" data-anchor-id="simulations-distribution-of-final-balances">3) 100 Simulations: Distribution of Final Balances</h3>
-<p>Describe the distribution of final account balances across 100 simulations. Report the mean, median, and the probability of ending with more than your initial $30,000. Given these results, would you be satisfied with the likely outcomes? Explain your reasoning.</p>
+<!--
+Describe the distribution of final account balances across 100 simulations. Report the mean, median, and the probability of ending with more than your initial $30,000. Given these results, would you be satisfied with the likely outcomes? Explain your reasoning.
+-->
+<div id="cell-q3-dist-100-py" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div id="q3-dist-100-py" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/q3-dist-100-py-output-1.png" width="758" height="374" class="figure-img"></p>
+<figcaption>Distribution of final balances across 100 simulations</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Now as we plot the distribution of final balances across 100 simulations, we can see that the distribution is heavily skewed to the left, with most simulations ending up with less than $30,000. The mean balance is $179,752, which is heavily skewed by the outliers in the data. The median balance is $1,292, and the probability of ending with more than $30,000 is 20%. This indicates that way more often than not, I am ending up with a loss from the buy-in, and in fact a significant loss at that. I would not be satisfied with the likely outcomes.</p>
 </section>
 <section id="probability-balance-30000-at-age-75-original-game" class="level3">
 <h3 class="anchored" data-anchor-id="probability-balance-30000-at-age-75-original-game">4) Probability Balance &gt; $30,000 at Age 75 (Original Game)</h3>
-<p>Report the probability that your final balance exceeds $30,000. Interpret what this probability means for your investment decision—does this change your recommendation from Section 1?</p>
+<!--
+Report the probability that your final balance exceeds $30,000. Interpret what this probability means for your investment decision—does this change your recommendation from Section 1?
+-->
+<div id="cell-q4-prob-original-py" class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display">
+<div id="q4-prob-original-py" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/q4-prob-original-py-output-1.png" width="470" height="374" class="figure-img"></p>
+<figcaption>Probability that final balance exceeds $30,000 (100 simulations)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The estimated probability that the final balance exceeds $30,000 is <strong><code>{python} prob_above_30k_rounded</code></strong> (about <strong><code>{python} round(prob_above_30k * 100, 1)</code>%</strong>). That means in only about one in five runs do you end up ahead of your buy-in; the other four in five you finish with less than $30,000. So there is a <strong>majority chance of losing money</strong> in this game, even though the one-flip expected value suggested a small average gain. This <strong>does change the recommendation from Section 1</strong>: Section 1’s expected-value argument pointed toward buying in, but the simulation shows that the <em>typical</em> outcome is a loss. I would <strong>not</strong> recommend buying in, because the high chance of finishing below $30,000 outweighs the positive expected value.</p>
 </section>
 <section id="modified-strategy-bet-exactly-25-each-round" class="level3">
 <h3 class="anchored" data-anchor-id="modified-strategy-bet-exactly-25-each-round">5) Modified Strategy (Bet Exactly 25% Each Round)</h3>
-<p>Instead of having the full balance at risk with each coin flip, assume only 25% of your balance is gambled each year. Compare this modified strategy to the original game: Which is riskier? Which has better upside? Which strategy would you recommend and why?</p>
+<!--
+Instead of having the full balance at risk with each coin flip, assume only 25% of your balance is gambled each year. Compare this modified strategy to the original game: Which is riskier? Which has better upside? Which strategy would you recommend and why?
+-->
+<div id="cell-q5-modified-25pct-py" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<div id="q5-modified-25pct-py" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/q5-modified-25pct-py-output-1.png" width="1046" height="422" class="figure-img"></p>
+<figcaption>Original vs modified (25% at risk) strategy: distribution of final balances</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Comparison and recommendation.</strong> The <strong>original strategy is riskier</strong>: the full balance is at risk each round, so outcomes are much more volatile—very high upside when you get a string of heads, but the median is far below the buy-in and most paths end below $30,000. The <strong>modified strategy (25% at risk)</strong> is less volatile: each round you only bet 25% of your balance, so you get +12.5% on heads and −10% on tails instead of +50% and −40%. That shrinks both extreme gains and extreme losses.</p>
+<p><strong>Upside:</strong> The original has <em>better</em> upside in the sense that a few simulations can reach very high balances (e.g., hundreds of thousands); the 25% strategy tends to cluster in a narrower band, so the best outcomes are lower. So the original is riskier and has higher potential upside albeit with a higher risk of losing money; the 25% strategy trades away some of that upside for much less downside in that losses are more minute per loss.</p>
+<p><strong>Recommendation:</strong> I would <strong>recommend the modified (25%) strategy</strong> over the original. The simulation shows that with 25% at risk, P(final &gt; $30,000) is about <strong><code>{python} round(p_above_30k_mod, 2)</code></strong> versus <strong><code>{python} round(p_above_30k_orig, 2)</code></strong> for the original—so a much larger share of paths end above the buy-in under the modified strategy, and the distribution of final balances is less skewed toward severe losses. The original game has positive expected value but a high probability of losing money; the 25% version keeps the favorable odds while reducing the chance of a catastrophic outcome, which is more aligned with a typical long-horizon investment goal. The extremes of how much money you gain is limited to a few simulations, but the losses are more manageable and less likely to be catastrophic, allowing for your balance to recover more easily form losses.</p>
 </section>
 <section id="the-kelly-criterion" class="level3">
 <h3 class="anchored" data-anchor-id="the-kelly-criterion">6) The Kelly Criterion</h3>
-<p>Explain what the Kelly Criterion is and how it relates to the modified strategy from Section 5. Does the Kelly Criterion support your recommendation?</p>
-</section>
-</section>
-<section id="professional-presentation" class="level2">
-<h2 class="anchored" data-anchor-id="professional-presentation">Professional Presentation</h2>
-<ul>
-<li><strong>Clear narrative:</strong> tell the story succinctly (aim for a 1–5 minute read)</li>
-<li><strong>Focus on insights:</strong> risk profiles, counter-intuitive results, practical implications</li>
-<li><strong>Professional style:</strong> concise writing, clean visuals, hide code where appropriate (<code>echo: false</code>)</li>
-<li><strong>Human interpretation:</strong> explain what results mean for real decisions</li>
-</ul>
-</section>
-<section id="submission-checklist" class="level2">
-<h2 class="anchored" data-anchor-id="submission-checklist">Submission Checklist ✅</h2>
-<ul class="task-list">
-<li><label><input type="checkbox">Quarto document written with narrative and results</label></li>
-<li><label><input type="checkbox">Rendered to HTML successfully</label></li>
-<li><label><input type="checkbox">Repository <code>simulationChallenge</code> created on GitHub</label></li>
-<li><label><input type="checkbox">HTML committed and pushed</label></li>
-<li><label><input type="checkbox">GitHub Pages enabled (Deploy from a branch → main → /(root))</label></li>
-<li><label><input type="checkbox">Site accessible at <code>https://[your-username].github.io/simulationChallenge/</code></label></li>
-</ul>
-</section>
-<section id="tips" class="level2">
-<h2 class="anchored" data-anchor-id="tips">Tips</h2>
-<ul>
-<li>Set random seeds for reproducibility</li>
-<li>Use object-oriented plotting with <code>matplotlib</code></li>
-<li>Keep figures readable and labeled; prefer professional styling</li>
-<li>Commit early and often; render locally before pushing</li>
-</ul>
+<!--
+Explain what the Kelly Criterion is and how it relates to the modified strategy from 
+Section 5. Does the Kelly Criterion support your recommendation?
+-->
+<p><strong>What the Kelly Criterion is.</strong> The Kelly Criterion is a formula for choosing the fraction of your bankroll to bet on a repeated favorable gamble so that long-run growth of wealth is maximized. It balances the upside of betting more (higher expected gain) against the downside of overbetting (higher risk of ruin and volatility drag). For a simple two-outcome bet where you gain a fraction (b) of your stake with probability (p) and lose a fraction (a) with probability (1-p), the optimal fraction is (f^* = ), provided this is positive (favorable bet).</p>
+<p><strong>Relation to the modified strategy.</strong> In our game, each flip is a favorable bet: (p = 0.5), and on heads you gain 50% on the amount at risk while on tails you lose 40% on that amount. So (b = 0.5) and (a = 0.4). Plugging in: (f^* = = = 0.25). So the Kelly-optimal fraction is <strong>25%</strong> of your balance at risk each round—exactly the modified strategy from Section 5.</p>
+<p><strong>Does Kelly support the recommendation?</strong> Yes. The Kelly Criterion says that betting 25% each round maximizes long-run growth and avoids the volatility drag and high risk of loss that come from betting the full balance (100%). The original game effectively bets 100% each round, which is far above Kelly and is riskier than optimal. Recommending the modified 25% strategy is therefore aligned with Kelly: it is the fraction that theory recommends for this payoff structure, and the simulations showed that this same fraction yields a much higher probability of finishing above the buy-in and a more manageable distribution of outcomes.</p>
+<!--
+## Professional Presentation
+
+- **Clear narrative:** tell the story succinctly (aim for a 1–5 minute read)
+- **Focus on insights:** risk profiles, counter-intuitive results, practical implications
+- **Professional style:** concise writing, clean visuals, hide code where appropriate (`echo: false`)
+- **Human interpretation:** explain what results mean for real decisions
+
+## Submission Checklist ✅
+
+- [ ] Quarto document written with narrative and results
+- [ ] Rendered to HTML successfully
+- [ ] Repository `simulationChallenge` created on GitHub
+- [ ] HTML committed and pushed
+- [ ] GitHub Pages enabled (Deploy from a branch → main → /(root))
+- [ ] Site accessible at `https://[your-username].github.io/simulationChallenge/`
+
+## Tips
+
+- Set random seeds for reproducibility
+- Use object-oriented plotting with `matplotlib`
+- Keep figures readable and labeled; prefer professional styling
+- Commit early and often; render locally before pushing
+
+-->
 </section>
 </section>
 
@@ -339,13 +336,14 @@ Figure&nbsp;1: Generative DAG model for the investment game showing how wealth e
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

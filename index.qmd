@@ -267,9 +267,9 @@ Report the probability that your final balance exceeds $30,000. Interpret what t
 ```{python}
 #| label: q4-prob-original-py
 #| # Using the 100 simulations, estimate P(final > $30,000).
-#| Round the probability to 2-3 decimal places.
-#| Present this result OUTSIDE this chunk in narrative form.
-#| Interpret what this probability means for your investment decision.
+#| # Round the probability to 2-3 decimal places.
+#| # Present this result OUTSIDE this chunk in narrative form.
+#| # Interpret what this probability means for your investment decision.
 #| fig-cap: "Probability that final balance exceeds $30,000 (100 simulations)"
 
 import numpy as np
@@ -296,7 +296,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-The estimated probability that the final balance exceeds $30,000 is **`{{python}} prob_above_30k_rounded`** (about **`{{python}} round(prob_above_30k * 100, 1)`%**). That means in only about one in five runs do you end up ahead of your buy-in; the other four in five you finish with less than $30,000. So there is a **majority chance of losing money** in this game, even though the one-flip expected value suggested a small average gain. This **does change the recommendation from Section 1**: Section 1’s expected-value argument pointed toward buying in, but the simulation shows that the *typical* outcome is a loss. I would **not** recommend buying in, because the high chance of finishing below $30,000 outweighs the positive expected value.
+The estimated probability that the final balance exceeds $30,000 is 20%. That means in only about one in five runs do you end up ahead of your buy-in; the other four in five you finish with less than $30,000. So there is a **majority chance of losing money** in this game, even though the one-flip expected value suggested a small average gain. This **does change the recommendation from Section 1**: Section 1’s expected-value argument pointed toward buying in, but the simulation shows that the *typical* outcome is a loss. I would **not** recommend buying in, because the high chance of finishing below $30,000 outweighs the positive expected value.
 
 ### 5) Modified Strategy (Bet Exactly 25% Each Round)
 <!--
@@ -389,7 +389,7 @@ plt.show()
 
 **Upside:** The original has *better* upside in the sense that a few simulations can reach very high balances (e.g., hundreds of thousands); the 25% strategy tends to cluster in a narrower band, so the best outcomes are lower. So the original is riskier and has higher potential upside albeit with a higher risk of losing money; the 25% strategy trades away some of that upside for much less downside in that losses are more minute per loss.
 
-**Recommendation:** I would **recommend the modified (25%) strategy** over the original. The simulation shows that with 25% at risk, P(final > $30,000) is about **`{{python}} round(p_above_30k_mod, 2)`** versus **`{{python}} round(p_above_30k_orig, 2)`** for the original—so a much larger share of paths end above the buy-in under the modified strategy, and the distribution of final balances is less skewed toward severe losses. The original game has positive expected value but a high probability of losing money; the 25% version keeps the favorable odds while reducing the chance of a catastrophic outcome, which is more aligned with a typical long-horizon investment goal. The extremes of how much money you gain is limited to a few simulations, but the losses are more manageable and less likely to be catastrophic, allowing for your balance to recover more easily form losses.
+**Recommendation:** I would **recommend the modified (25%) strategy** over the original. The simulation shows that with 25% at risk, P(final > $30,000) is about 60% versus 20% for the original—so a much larger share of paths end above the buy-in under the modified strategy, and the distribution of final balances is less skewed toward severe losses. The original game has positive expected value but a high probability of losing money; the 25% version keeps the favorable odds while reducing the chance of a catastrophic outcome, which is more aligned with a typical long-horizon investment goal. The extremes of how much money you gain is limited to a few simulations, but the losses are more manageable and less likely to be catastrophic, allowing for your balance to recover more easily from losses.
 
 ### 6) The Kelly Criterion
 <!--
